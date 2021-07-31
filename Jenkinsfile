@@ -29,19 +29,19 @@ pipeline{
                     echo "docker image built"
                 }
             }
-                 stage('image push') {
-            steps {
-                echo 'pushing docker image'
-                sh "docker push 2alinfo7/position-simulator:${commit_id} "
-                echo 'docker image pushed'
+            stage('image push') {
+                steps {
+              	    echo 'pushing docker image'
+                    sh "docker push 2alinfo7/position-simulator:${commit_id} "
+                    echo 'docker image pushed'
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+      } 
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying....'
 
-                sh "sed -i -r 's|richardchesterwood/k8s-fleetman-position-simulator:release2|2alinfo7/position-simulator:${commit_id}|' workloads.yaml"
-                sh 'kubectl apply -f workloads.yaml --namespace dev1 '
+                    sh "sed -i -r 's|richardchesterwood/k8s-fleetman-position-simulator:release2|2alinfo7/position-simulator:${commit_id}|' workloads.yaml"
+                    sh 'kubectl apply -f workloads.yaml --namespace dev1 '
 
                 
             }
