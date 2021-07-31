@@ -39,8 +39,9 @@ pipeline{
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh "sed -i -r 's|richardchesterwood/k8s-fleetman-position-simulator:release2|2alinfo7/position-simulator:${commit_id}|' workloads.yaml"
-                sh 'kubectl apply -f workloads.yaml --namespace assignement6Group4 '
+                sh "sed -i -r 's|richardchesterwood/k8s-fleetman-webapp-angular:release2|2alinfo7/position-simulator:${commit_id}|' workloads.yaml"
+                sh "kubectl apply -f workloads.yaml "
+                echo " Deployment completed"
             }
         }
     }
