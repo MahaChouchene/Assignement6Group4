@@ -34,8 +34,9 @@ pipeline{
               	    echo 'pushing docker image'
                     sh "docker push 2alinfo7/position-simulator:${commit_id} "
                     echo 'docker image pushed'
-            }
-      } 
+                }
+	
+            } 
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
@@ -44,8 +45,8 @@ pipeline{
                     sh 'kubectl apply -f workloads.yaml --namespace dev1 '
 
                 
+                }
             }
-        }
-    }
-}
+       }
+  }
 
